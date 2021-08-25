@@ -1,0 +1,4 @@
+cryptography==3.2
+pyOpenSSL==20.0.1
+lxml==4.6.3
+
