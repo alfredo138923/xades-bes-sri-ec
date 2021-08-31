@@ -2,7 +2,13 @@
 
 Implementación en python del código para la firma de la facturación electrónica ecuatoriana usando el formato XAdES-BES sin librerias externas de python.
 
-Requerimientos:
+Requerimientos maquina:
+
+```bash
+apt-get install libxml2-utils
+```
+
+Requerimientos python:
 
 ```bash
 cryptography==3.2.1
