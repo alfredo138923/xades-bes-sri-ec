@@ -124,15 +124,13 @@ def get_modulo(mod_int):
 def get_certificate_x509(cert):
     certificate_pem_tmp = str(cert)
 
-    certX509 = re.search(
-        r"(?<=-----BEGIN CERTIFICATE-----\\n).*?(?=\\n-----END CERTIFICATE-----)",
+    certX509 = re.findall(
+        r"-----BEGIN CERTIFICATE-----(.*?)-----END CERTIFICATE-----",
         certificate_pem_tmp, flags=re.DOTALL
     )
 
-    certX509 = str(certX509.group())
-    certX509 = certX509.replace('\\n', '')
+    certX509 = certX509[0].replace('\n', '').replace('\\n', '')
 
-    certX509 = re.sub(r'/\r?\n|\r/g', '', certX509)
     certX509 = split_string_every_n(certX509, MAX_LINE_SIZE)
 
     return certX509

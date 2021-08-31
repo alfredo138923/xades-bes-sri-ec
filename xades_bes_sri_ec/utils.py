@@ -3,6 +3,9 @@ from random import random
 import math
 import hashlib
 import binascii
+import sys
+
+PY3 = sys.version_info[0] >= 3
 
 
 def sha1_base64(txt):
@@ -41,7 +44,7 @@ def split_string_every_n(cad, n):
 
 
 def p_obtener_aleatorio():
-    return math.floor(random() * 999000) + 990
+    return int(math.floor(random() * 999000) + 990)
 
 
 def separar_cadena(cadena, delimitador, append_start=True):
@@ -68,7 +71,7 @@ def separar_cadena(cadena, delimitador, append_start=True):
 
 def encode_base64(cad, encode='UTF-8'):
 
-    if hasattr(cad, 'encode'):
+    if hasattr(cad, 'encode') and PY3:
         cad = base64.b64encode(cad.encode(encode))
     else:
         cad = base64.b64encode(cad)

@@ -9,14 +9,14 @@ setup(
     author_email='alfredo138923@pm.me',
     license='AGPL V3',
     packages=['xades_bes_sri_ec'],
-    install_requires=['cryptography==3.2', 'pyOpenSSL==20.0.1', 'lxml==4.6.3'],
+    install_requires=['cryptography==3.2.1', 'pyOpenSSL==20.0.1', 'lxml==4.6.3'],
 
     classifiers=[
         'Development Status :: Alpha',
-        'Intended Audience :: Programming Language :: Python :: 3',
+        'Intended Audience :: Programming Language :: Python :: 3 :: 2',
         'License :: AGPL V3',
         'Operating System :: POSIX :: Linux',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3 :: Only',
+        'Programming Language :: Python :: 2',
     ],
 )

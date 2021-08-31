@@ -1,12 +1,13 @@
 # xades-bes-sri-ec
 
-Implementación en python del código para la firma de la facturación electrónica ecuatoriana usando el formato XAdES-BES sin librerias externas.
+Implementación en python del código para la firma de la facturación electrónica ecuatoriana usando el formato XAdES-BES sin librerias externas de python.
 
 Requerimientos:
 
 ```bash
-cryptography==3.2
+cryptography==3.2.1
 pyOpenSSL==20.0.1
+lxml==4.6.3
 ```
 
 Instalación:
@@ -29,7 +30,7 @@ ruta_xml_firmado = xades.firmar_comprobante(ruta_p12, clave_p12, ruta_xml, ruta_
 
 ## Créditos:
 Implementación original en Nodejs por
-[Jybaro](https://www.jybaro.com/blog/firma-electronica-de-factura-electronica/)
+[Jybaro](https://www.jybaro.com/blog/firma-electronica-de-factura-electronica/), con algunos cambios aplicados despues decompilar el JAR del firmador oficial del SRI para formar la misma salida del XML
 
 ## Contactos
 alfredo138923@pm.me

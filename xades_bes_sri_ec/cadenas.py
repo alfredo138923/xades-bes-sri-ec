@@ -51,7 +51,7 @@ def get_signed_properties(signature_number, signed_properties_number, certificat
     </etsi:SignedProperties>"""
 
    fecha_hora = datetime.now().strftime("%Y-%m-%dT%H:%M:%SZ")
-   fecha_hora = '2021-08-20T00:00:00-05:00'
+#    fecha_hora = '2021-08-20T00:00:00-05:00'
 
    signed_properties = signed_properties % {
        'signature_number': signature_number,
