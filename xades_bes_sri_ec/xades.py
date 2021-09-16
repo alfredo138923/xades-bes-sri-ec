@@ -65,11 +65,29 @@ def get_clave_privada(ruta_p12, password):
     delimitador_final = '-----END ENCRYPTED PRIVATE KEY-----'
 
     claves_privadas = separar_cadena(salida_cmd, delimitador_final, append_start=False)
+    claves_validas = []
 
     for cp in claves_privadas:
 
-        if 'Signing Key' in cp:
-            clave_privada_firma = separar_cadena(cp, delimitador_inicio, append_start=True)
+        regex = '{}(.+?){}'.format(delimitador_inicio, delimitador_final)
+        m = re.search(regex, cp, flags=re.DOTALL)
+
+        if m:
+            claves_validas.append(cp)
+
+    if len(claves_validas) > 1:
+        # Si la clave contiene mas de una clave privada,
+        # buscar la que tenga el atributo 'Signing Key'
+
+        for cp in claves_validas:
+
+            if 'Signing Key' in cp:
+                clave_privada_firma = cp
+
+    elif len(claves_validas) == 1:
+        clave_privada_firma = claves_validas[0]
+
+    clave_privada_firma = separar_cadena(clave_privada_firma, delimitador_inicio, append_start=True)
 
     if len(clave_privada_firma) > 0:
         return clave_privada_firma[1]
@@ -153,6 +171,11 @@ def procesar_firmar_comprobante(archivo_p12, ruta_p12, password, xml, ruta_xml_a
     modulo = get_modulo(cert.public_key().public_numbers().n)
     exponente = get_exponente(cert.public_key().public_numbers().e)
     serial_number = cert_pem.get_serial_number()
+    issuer_name = cert_pem.get_issuer()
+
+    issuer_name =  "".join(",{0:s}={1:s}".format(name.decode(), value.decode()) for name, value in issuer_name.get_components())
+
+    issuer_name = issuer_name.replace(',', '', 1) if issuer_name.startswith(',') else issuer_name
 
     xml_element_tree = ET.ElementTree(ET.fromstring(xml))
     xml_no_header = get_c14n(xml)
@@ -173,7 +196,7 @@ def procesar_firmar_comprobante(archivo_p12, ruta_p12, password, xml, ruta_xml_a
 
     signed_properties = get_signed_properties(
         signature_number, signed_properties_number, certificateX509_der_hash, serial_number,
-        reference_id_number
+        reference_id_number, issuer_name
     )
 
     signed_properties_para_hash = signed_properties.replace('<etsi:SignedProperties', '<etsi:SignedProperties ' + xmlns)

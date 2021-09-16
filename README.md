@@ -18,7 +18,7 @@ lxml==4.6.3
 
 Instalación:
 ```bash
-pip install git+https://github.com/alfredo138923/xades-bes-sri-ec@0.1.0
+pip install git+https://github.com/alfredo138923/xades-bes-sri-ec@0.1.1
 ```
 
 ## Ejemplo:

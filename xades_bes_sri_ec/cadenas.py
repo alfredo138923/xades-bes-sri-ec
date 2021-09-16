@@ -12,7 +12,7 @@ def format_xml_string(cad):
    return cad
 
 
-def get_signed_properties(signature_number, signed_properties_number, certificateX509_der_hash, X509SerialNumber, reference_id_number):
+def get_signed_properties(signature_number, signed_properties_number, certificateX509_der_hash, X509SerialNumber, reference_id_number, issuer_name):
    signed_properties = """
     <etsi:SignedProperties Id="Signature%(signature_number)s-SignedProperties%(signed_properties_number)s">
         <etsi:SignedSignatureProperties>
@@ -29,7 +29,7 @@ def get_signed_properties(signature_number, signed_properties_number, certificat
                     </etsi:CertDigest>
                     <etsi:IssuerSerial>
                         <ds:X509IssuerName>
-                            CN=AC BANCO CENTRAL DEL ECUADOR,L=QUITO,OU=ENTIDAD DE CERTIFICACION DE INFORMACION-ECIBCE,O=BANCO CENTRAL DEL ECUADOR,C=EC
+                            %(issuer_name)s
                         </ds:X509IssuerName>
                         <ds:X509SerialNumber>
                             %(X509SerialNumber)s
@@ -51,7 +51,6 @@ def get_signed_properties(signature_number, signed_properties_number, certificat
     </etsi:SignedProperties>"""
 
    fecha_hora = datetime.now().strftime("%Y-%m-%dT%H:%M:%SZ")
-#    fecha_hora = '2021-08-20T00:00:00-05:00'
 
    signed_properties = signed_properties % {
        'signature_number': signature_number,
@@ -59,7 +58,8 @@ def get_signed_properties(signature_number, signed_properties_number, certificat
        'certificateX509_der_hash': certificateX509_der_hash,
        'X509SerialNumber': X509SerialNumber,
        'reference_id_number': reference_id_number,
-       'fecha_hora': fecha_hora
+       'fecha_hora': fecha_hora,
+       'issuer_name': issuer_name
    }
 
    signed_properties = format_xml_string(signed_properties)
