@@ -157,6 +157,9 @@ def get_certificate_x509(cert):
 def procesar_firmar_comprobante(archivo_p12, ruta_p12, password, xml, ruta_xml_auth):
     certificados, _ = get_certificados_validos(archivo_p12, password)
 
+    if len(certificados) == 0:
+        raise Exception("No se han encontrado certificados válidos")
+
     cert = certificados[0]
 
     certificate_pem = crypto.dump_certificate(crypto.FILETYPE_PEM, cert)

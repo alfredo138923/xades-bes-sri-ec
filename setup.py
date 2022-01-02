@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='xades-bes-sri-ec',
-    version='0.1.0',
+    version='0.1.1',
     description='Firma de la facturación electrónica ecuatoriana usando el formato XAdES-BES',
     url='https://github.com/alfredo138923/xades_bes_sri_ec',
     author='Alfredo Marcillo',
