@@ -55,7 +55,7 @@ def get_clave_privada(ruta_p12, password):
         'password': password.decode(),
     }
 
-    CMD_OPENSSL = ' openssl pkcs12  -in {ruta} -nocerts -passin pass:{password} -passout pass:{password} '.format(**data)
+    CMD_OPENSSL = " openssl pkcs12  -in '{ruta}' -nocerts -passin pass:{password} -passout pass:{password} ".format(**data)
 
     salida_cmd = subprocess.check_output(CMD_OPENSSL, shell=True)
 
@@ -176,7 +176,7 @@ def procesar_firmar_comprobante(archivo_p12, ruta_p12, password, xml, ruta_xml_a
     serial_number = cert_pem.get_serial_number()
     issuer_name = cert_pem.get_issuer()
 
-    issuer_name =  "".join(",{0:s}={1:s}".format(name.decode(), value.decode()) for name, value in issuer_name.get_components())
+    issuer_name = "".join(",{0:s}={1:s}".format(name.decode(), value.decode()) for name, value in issuer_name.get_components())
 
     issuer_name = issuer_name.replace(',', '', 1) if issuer_name.startswith(',') else issuer_name
 
@@ -245,7 +245,6 @@ def procesar_firmar_comprobante(archivo_p12, ruta_p12, password, xml, ruta_xml_a
 
 
 def firmar_comprobante(ruta_p12, password, ruta_xml, ruta_xml_auth):
-
 
     cert = leer_archivo(ruta_p12, 'rb')
     xml = leer_archivo(ruta_xml)

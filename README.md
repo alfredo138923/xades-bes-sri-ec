@@ -18,7 +18,7 @@ lxml==4.6.3
 
 Instalación:
 ```bash
-pip install git+https://github.com/alfredo138923/xades-bes-sri-ec@0.1.1
+pip install git+https://github.com/alfredo138923/xades-bes-sri-ec@0.1.2
 ```
 
 ## Ejemplo:
@@ -39,7 +39,7 @@ Implementación original en Nodejs por
 [Jybaro](https://www.jybaro.com/blog/firma-electronica-de-factura-electronica/), con algunos cambios aplicados despues decompilar el JAR del firmador oficial del SRI para formar la misma salida del XML
 
 ## Contactos
-alfredo138923@pm.me
+alfredo138923@gmail.com
 
 ## Licencia
 [AGPL V3](https://choosealicense.com/licenses/agpl-3.0/)
